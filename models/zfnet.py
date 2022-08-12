@@ -20,11 +20,11 @@ class ZFNet(nn.Module):
         super().__init__()
         self.in_channels = in_channels
         self.class_numbers = class_numbers
-        self.feature_extraction = self._create_conv_layers()
+        self.conv_layers = self._create_conv_layers()
         self.fcs = self._create_fcs()
 
     def forward(self, x):
-        x = self.feature_extraction(x)
+        x = self.conv_layers(x)
         return self.fcs(x)
 
     def _create_conv_layers(self):
