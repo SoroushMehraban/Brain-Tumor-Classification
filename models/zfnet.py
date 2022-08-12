@@ -55,7 +55,8 @@ class ZFNet(nn.Module):
             nn.Linear(4096, 4096),
             nn.Dropout(),
             nn.LeakyReLU(0.1),
-            nn.Linear(4096, self.class_numbers)
+            nn.Linear(4096, self.class_numbers),
+            nn.Softmax(dim=1)
         )
 
 
@@ -63,8 +64,9 @@ def verify_model():
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     input_example = torch.rand(8, 3, 224, 224).to(device)
-    model = ZFNet(class_numbers=1000).to(device)
+    model = ZFNet(class_numbers=4).to(device)
     out = model(input_example)
+    print(out)
     print(out.shape)
 
 
