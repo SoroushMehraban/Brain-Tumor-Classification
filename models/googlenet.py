@@ -70,7 +70,6 @@ class GoogLeNet(nn.Module):
         x = self.inception_layers(x)
         x = self.avg_pool(x)
         x = x.reshape(x.shape[0], -1)
-        print(x.shape)
         x = self.dropout(x)
         x = self.linear(x)
         return self.softmax(x)
