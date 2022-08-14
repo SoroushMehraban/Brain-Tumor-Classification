@@ -55,8 +55,7 @@ class AlexNet(nn.Module):
             nn.Linear(4096, 4096),
             nn.Dropout(),
             nn.LeakyReLU(0.1),
-            nn.Linear(4096, self.class_numbers),
-            nn.Softmax(dim=1)
+            nn.Linear(4096, self.class_numbers)
         )
 
 
@@ -66,7 +65,6 @@ def verify_model():
     input_example = torch.rand(8, 3, 227, 227).to(device)
     model = AlexNet(class_numbers=4).to(device)
     out = model(input_example)
-    print(out)
     print(out.shape)
 
 

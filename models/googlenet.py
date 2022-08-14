@@ -63,7 +63,6 @@ class GoogLeNet(nn.Module):
         self.avg_pool = nn.AvgPool2d(kernel_size=7, stride=1, padding=0)
         self.dropout = nn.Dropout(p=0.4)
         self.linear = nn.Linear(1024, class_numbers)
-        self.softmax = nn.Softmax(dim=1)
 
     def forward(self, x):
         x = self.stem_layers(x)
@@ -72,7 +71,7 @@ class GoogLeNet(nn.Module):
         x = x.reshape(x.shape[0], -1)
         x = self.dropout(x)
         x = self.linear(x)
-        return self.softmax(x)
+        return x
 
     @staticmethod
     def _create_inception_layers():

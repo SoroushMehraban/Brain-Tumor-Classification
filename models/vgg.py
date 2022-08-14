@@ -92,8 +92,7 @@ class VGG(nn.Module):
             nn.Linear(4096, 4096),
             nn.Dropout(),
             nn.LeakyReLU(0.1),
-            nn.Linear(4096, self.class_numbers),
-            nn.Softmax(dim=1)
+            nn.Linear(4096, self.class_numbers)
         )
 
 
@@ -103,13 +102,11 @@ def verify_model():
     input_example = torch.rand(4, 3, 224, 224).to(device)
     model = VGG(class_numbers=4, version=16).to(device)
     out = model(input_example)
-    print(out)
     print(out.shape)
     print("=== VGG19 ===")
     input_example = torch.rand(4, 3, 224, 224).to(device)
     model = VGG(class_numbers=4, version=19).to(device)
     out = model(input_example)
-    print(out)
     print(out.shape)
 
 
