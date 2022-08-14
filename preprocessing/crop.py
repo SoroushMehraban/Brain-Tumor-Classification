@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from glob import glob
 import imutils
@@ -31,7 +32,7 @@ def get_cropped_coords(image):
 
 
 def create_folders_if_not_exist(out_path):
-    directory = "\\".join(out_path.split("\\")[:-1])
+    directory = os.sep.join(out_path.split(os.sep)[:-1])
     Path(directory).mkdir(parents=True, exist_ok=True)
 
 
@@ -41,16 +42,16 @@ def read_image(image_path):
 
 
 def store_image(cropped_image, image_path):
-    out_path = image_path.replace("dataset", "modified_dataset")
+    out_path = image_path.replace(f"..{os.sep}", "")
     create_folders_if_not_exist(out_path)
     cv2.imwrite(out_path, cropped_image)
 
 
-def preprocess(mode):
+def crop_contours(mode):
     assert mode in ['Training', 'Testing']
 
     for tumor_type in TUMOR_TYPES:
-        image_paths = glob(f"..\\dataset\\{mode}\\{tumor_type}\\*")
+        image_paths = glob(f"..{os.sep}dataset{os.sep}{mode}{os.sep}{tumor_type}{os.sep}*")
         for image_path in image_paths:
             image = read_image(image_path)
             x_min, y_min, x_max, y_max = get_cropped_coords(image)
@@ -59,8 +60,8 @@ def preprocess(mode):
 
 
 def main():
-    preprocess('Training')
-    preprocess('Testing')
+    crop_contours('Training')
+    crop_contours('Testing')
 
 
 if __name__ == '__main__':
