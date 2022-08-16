@@ -6,12 +6,14 @@ import torch
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = AlexNet(class_numbers=4).to(DEVICE)
+model = AlexNet(class_numbers=4, in_channels=1).to(DEVICE)
 
 IMAGE_WIDTH = 227
 IMAGE_HEIGHT = 227
 
-LEARNING_RATE = 1e-3
+LEARNING_RATE = 1e-4
+BETA1 = 0.9
+BETA2 = 0.999
 EPOCHS = 5000
 BATCH_SIZE = 64
 
@@ -20,8 +22,8 @@ CHECKPOINT_FILE = "<PATH TO CHECKPOINT HERE>"
 
 RANDOM_SEED = 5
 PIN_MEMORY = True
-LOAD_MODEL = True
-SAVE_MODEL = True
+LOAD_MODEL = False
+SAVE_MODEL = False
 
 transform = A.Compose(
     [
