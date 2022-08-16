@@ -57,5 +57,5 @@ All the configurations during training the model can be adjusted in `config.py`.
 - **SAVE_MODEL**: If `True`, then stores the model checkpoint after each 10 epochs.
 - **transform**: Since input images might have different sizes, this transform is used to make their size equal and all of them have zero mean and unit std dev.
 
-## Training the model
+### Training the model
 Just execute the `train.py`.
