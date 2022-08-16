@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from utils import ConvBlock
+from models.utils import ConvBlock
 
 RESNET_VERSIONS = {
     18: {
