@@ -113,7 +113,7 @@ class BottleneckResidualBlock(nn.Module):
 
 
 class ResNet(nn.Module):
-    def __init__(self, version, num_classes, in_channels=3):
+    def __init__(self, version, class_numbers, in_channels=3):
         super().__init__()
 
         assert version in RESNET_VERSIONS
@@ -124,7 +124,7 @@ class ResNet(nn.Module):
         self.stem_layers = self._create_stem_layers()
         self.resnet_blocks = self._create_resnet_blocks()
         self.avg_pool = nn.AdaptiveAvgPool2d(output_size=(1, 1))
-        self.linear = nn.Linear(512, num_classes)
+        self.linear = nn.Linear(512, class_numbers)
 
     def forward(self, x):
         x = self.stem_layers(x)
