@@ -33,7 +33,7 @@ def get_loaders():
     images_len = images.shape[0]
     train_images, validation_images, test_images = np.split(images,
                                                             [int(config.TRAIN_RATIO * images_len),
-                                                             int(config.TRAIN_RATIO + config.VALIDATION_RATIO
+                                                             int((config.TRAIN_RATIO + config.VALIDATION_RATIO)
                                                                  * images_len)])
 
     train_dataset = BrainTumorDataset(train_images.tolist(), transform=config.transform)
