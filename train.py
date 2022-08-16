@@ -16,9 +16,9 @@ logging.basicConfig(level=logging.INFO)
 
 
 def step_scheduler(epoch):
-    if epoch < config.EPOCHS * 0.8:
+    if epoch < config.EPOCHS * config.SCHEDULER_STEP1:
         factor = 1
-    elif config.EPOCHS * 0.8 <= epoch < config.EPOCHS * 0.9:
+    elif config.EPOCHS * config.SCHEDULER_STEP1 <= epoch < config.EPOCHS * config.SCHEDULER_STEP2:
         factor = 0.1
     else:
         factor = 0.01
@@ -31,7 +31,10 @@ def get_loaders():
     np.random.shuffle(images)
 
     images_len = images.shape[0]
-    train_images, validation_images, test_images = np.split(images, [int(0.75 * images_len), int(0.85 * images_len)])
+    train_images, validation_images, test_images = np.split(images,
+                                                            [int(config.TRAIN_RATIO * images_len),
+                                                             int(config.TRAIN_RATIO + config.VALIDATION_RATIO
+                                                                 * images_len)])
 
     train_dataset = BrainTumorDataset(train_images.tolist(), transform=config.transform)
     validation_dataset = BrainTumorDataset(validation_images.tolist(), transform=config.transform)
