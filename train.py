@@ -156,7 +156,7 @@ def main():
 
         if epoch % 10 == 0 or epoch == 1:
             if config.SAVE_MODEL:
-                save_checkpoint(model, optimizer, scheduler, current_epoch + 1, filename=config.CHECKPOINT_FILE)
+                save_checkpoint(model, optimizer, scheduler, epoch + 1, filename=config.CHECKPOINT_FILE)
 
             validation_loss = validation_fn(validation_loader, model, loss_fn)
             accuracy = accuracy_fn(validation_loader, model)
